@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    link(rel="stylesheet", type="text/css", href="//cdn.datatables.net/v/bs4-4.0.0/jq-3.2.1/dt-1.10.16/datatables.min.css")
+    script(src="//cdn.datatables.net/v/bs4-4.0.0/jq-3.2.1/dt-1.10.16/datatables.min.js")
+    title NBA Battle Royale
+  body
+    .container
+      script.
+        $(document).ready( function () {
+          $("#players").DataTable({
+            "aaSorting": [[1,"desc"]]
+          });
+        });
+
+      .row
+      table#players.table.table-hover.dt-responsive
+        thead
+          tr
+            th Player
+            th Score
+        tbody
+          each player in players
+            tr
+              td
+                a(href=player.url) #{player.name}
+              td #{player.score}

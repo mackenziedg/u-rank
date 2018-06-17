@@ -51,6 +51,12 @@ app.post('/', function(req, res){
     });
 });
 
+app.get('/rankings', function(req, res){
+    Players.find({}).sort('-score').then(function(d){
+        res.render('rankings', {players: d});
+    });
+});
+
 // Static import directories
 // app.use('/static', serve(__dirname + '/public'));
 
