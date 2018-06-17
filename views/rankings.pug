@@ -10,8 +10,7 @@ html
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
         .navbar-brand NBA Battle Royale
         ul.navbar-nav
-          li.navbar-item: a.nav-link(href="/") Play!
-          li.navbar-item: a.nav-link(href="/rankings") View Rankings
+          li.navbar-item: a.nav-link(href="/") Play more!
 
       script.
         $(document).ready( function () {
@@ -26,9 +25,11 @@ html
           tr
             th Player
             th Score
+            th Active
         tbody
           each player in players
             tr
               td
                 a(href=player.url) #{player.name}
               td #{player.score}
+              td #{player.active}

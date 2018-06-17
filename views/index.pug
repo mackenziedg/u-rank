@@ -1,30 +1,129 @@
 doctype html
 html
   head
-    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css", type="text/css")
+    link(rel="stylesheet", href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.css", type="text/css")
+    script(type="text/javascript", src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js")
     title NBA Battle Royale
+
   body
     .container
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
         .navbar-brand NBA Battle Royale
-        ul.navbar-nav
-          li.navbar-item: a.nav-link(href="/") Play!
-          li.navbar-item: a.nav-link(href="/rankings") View Rankings
+        .collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            if route==''
+              li.nav-item.active: a.nav-link(href="/") All players
+            else
+              li.nav-item: a.nav-link(href="/") All players
+            if route=='hof'
+              li.nav-item.active: a.nav-link(href="/hof") HOF
+            else
+              li.nav-item: a.nav-link(href="/hof") HOF
+            if route=='active'
+              li.nav-item.active: a.nav-link(href="/active") Active
+            else
+              li.nav-item: a.nav-link(href="/active") Active
+            if route=='retired'
+              li.nav-item.active: a.nav-link(href="/retired") Retired
+            else
+              li.nav-item: a.nav-link(href="/retired") Retired
+
+            li.nav-item: a.nav-link(href="/rankings") View Rankings
+
 
       .row
         .col-md-5.text-center
-          form.mt-3(action="/", method="POST")
+          img(src=r[0].img_path, height="128px")
+          form.mt-3(method="POST")
             .form-group
               input(type="hidden", name="playerids", value=r[0]._id+":"+r[1]._id)
               button(type="submit", name="submit", class="btn btn-default")
-                h1 #{r[0].name}
+                h2 #{r[0].name}
+
+          h3 Career stats
+          table.table.table-sm
+            thead
+              tr
+                th G
+                th PTS
+                th TRB
+                th AST
+                th FG%
+                th 3PT%
+                th FT%
+              tr
+                td #{r[0].stats.G}
+                td #{r[0].stats.PTS}
+                td #{r[0].stats.TRB}
+                td #{r[0].stats.AST}
+                td #{r[0].stats['FG%']}
+                td #{r[0].stats['3PT%']}
+                td #{r[0].stats['FT%']}
+
+          if r[0].bling.length > 0
+            h4 Accolades
+            p
+              -  for(i = 0; i < r[0].bling.length; i++)
+                   | #{r[0].bling[i]}
+                   if i < r[0].bling.length-1
+                     | , 
+
+          else
+            h4 No accolades
+
+          if r[0].active
+            h4 Currently active
+          else
+            h4 Retired
+
           a(href=r[0].url) View my Basketball-Reference page.
-        .col-md-1.text-center.align-middle
-          img(src="./static/img/vs_graphic.png", width="100%")
+
+        .col-md-2.text-center.align-middle
+          img(src="./static/img/vs_graphic.png", width="128px")
+
         .col-md-5.text-center
-          form.mt-3(action="/", method="POST")
+          img(src=r[1].img_path, height="128px")
+          form.mt-3(method="POST")
             .form-group
               input(type="hidden", name="playerids", value=r[1]._id+":"+r[0]._id)
               button(type="submit", name="submit", class="btn btn-default")
-                h1 #{r[1].name}
+                h2 #{r[1].name}
+
+          h3 Career stats
+          table.table.table-sm
+            thead
+              tr
+                th G
+                th PTS
+                th TRB
+                th AST
+                th FG%
+                th 3PT%
+                th FT%
+              tr
+                td #{r[1].stats.G}
+                td #{r[1].stats.PTS}
+                td #{r[1].stats.TRB}
+                td #{r[1].stats.AST}
+                td #{r[1].stats['FG%']}
+                td #{r[1].stats['3PT%']}
+                td #{r[1].stats['FT%']}
+
+          if r[1].bling.length > 0
+            h4 Accolades
+            p
+              -  for(i = 0; i < r[1].bling.length; i++)
+                   | #{r[1].bling[i]}
+                   if i < r[1].bling.length-1
+                     | , 
+
+          else
+            h4 No accolades
+
+          if r[1].active
+            h4 Currently active
+          else
+            h4 Retired
+
+
           a(href=r[1].url) View my Basketball-Reference page.
