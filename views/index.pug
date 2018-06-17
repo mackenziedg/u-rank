@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css", type="text/css")
+    title NBA Battle Royale
+  body
+    .container
+      .row
+        .col-md-6.text-center
+          form.mt-3(action="/", method="POST")
+            .form-group
+              input(type="hidden", name="playerids", value=r[0]._id+":"+r[1]._id)
+              button(type="submit", name="submit", class="btn btn-default")
+                h1 #{r[0].name}
+          a(href=r[0].url) View my Basketball-Reference page.
+        .col-md-6.text-center
+          form.mt-3(action="/", method="POST")
+            .form-group
+              input(type="hidden", name="playerids", value=r[1]._id+":"+r[0]._id)
+              button(type="submit", name="submit", class="btn btn-default")
+                h1 #{r[1].name}
+          a(href=r[1].url) View my Basketball-Reference page.
