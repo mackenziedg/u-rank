@@ -37,7 +37,7 @@ html
           form.mt-3(method="POST")
             .form-group
               input(type="hidden", name="playerids", value=r[0]._id+":"+r[1]._id)
-              button(type="submit", name="submit", class="btn btn-default")
+              button.btn.btn-primary(type="submit", name="submit")
                 h2 #{r[0].name}
 
           h3 Career stats
@@ -48,17 +48,27 @@ html
                 th PTS
                 th TRB
                 th AST
+                th
                 th FG%
-                th 3PT%
+                if r[0].stats.hasOwnProperty("FG3%")
+                  th 3P%
                 th FT%
+                th
+                th PER
+                th WS
               tr
                 td #{r[0].stats.G}
                 td #{r[0].stats.PTS}
                 td #{r[0].stats.TRB}
                 td #{r[0].stats.AST}
-                td #{r[0].stats['FG%']}
-                td #{r[0].stats['3PT%']}
-                td #{r[0].stats['FT%']}
+                td
+                td #{r[0].stats['FG%'].toFixed(3)}
+                if r[0].stats.hasOwnProperty("FG3%")
+                  td #{r[0].stats['FG3%'].toFixed(3)}
+                td #{r[0].stats['FT%'].toFixed(3)}
+                td
+                td #{r[0].stats.PER}
+                td #{r[0].stats.WS}
 
           if r[0].bling.length > 0
             h4 Accolades
@@ -86,7 +96,7 @@ html
           form.mt-3(method="POST")
             .form-group
               input(type="hidden", name="playerids", value=r[1]._id+":"+r[0]._id)
-              button(type="submit", name="submit", class="btn btn-default")
+              button.btn.btn-primary(type="submit", name="submit")
                 h2 #{r[1].name}
 
           h3 Career stats
@@ -97,17 +107,27 @@ html
                 th PTS
                 th TRB
                 th AST
+                th
                 th FG%
-                th 3PT%
+                if r[1].stats.hasOwnProperty("FG3%")
+                  th 3PT%
                 th FT%
+                th
+                th PER
+                th WS
               tr
                 td #{r[1].stats.G}
                 td #{r[1].stats.PTS}
                 td #{r[1].stats.TRB}
                 td #{r[1].stats.AST}
-                td #{r[1].stats['FG%']}
-                td #{r[1].stats['3PT%']}
-                td #{r[1].stats['FT%']}
+                td
+                td #{r[1].stats['FG%'].toFixed(3)}
+                if r[1].stats.hasOwnProperty("FG3%")
+                  td #{r[1].stats['FG3%'].toFixed(3)}
+                td #{r[1].stats['FT%'].toFixed(3)}
+                td
+                td #{r[0].stats.PER}
+                td #{r[0].stats.WS}
 
           if r[1].bling.length > 0
             h4 Accolades

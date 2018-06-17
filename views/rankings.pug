@@ -25,11 +25,21 @@ html
           tr
             th Player
             th Score
-            th Active
+            th Active?
+            th HOF?
         tbody
           each player in players
             tr
               td
                 a(href=player.url) #{player.name}
               td #{player.score}
-              td #{player.active}
+              td
+                if player.active
+                  p Active
+                else
+                  p No
+              td
+                if player.bling.indexOf("Hall of Fame") >= 0
+                  p HOF
+                else
+                  p No
