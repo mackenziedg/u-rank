@@ -3,6 +3,7 @@ require('dotenv').config();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Players = require('./models/Players.js');
+var serve = require('serve-static');
 
 var elo = require('./elo.js');
 
@@ -58,7 +59,7 @@ app.get('/rankings', function(req, res){
 });
 
 // Static import directories
-// app.use('/static', serve(__dirname + '/public'));
+app.use('/static', serve(__dirname + '/public'));
 
 // Start server
 var port = process.env.PORT || 8080;
