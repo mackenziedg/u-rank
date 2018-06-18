@@ -15,7 +15,7 @@ html
       script.
         $(document).ready( function () {
           $("#players").DataTable({
-            "aaSorting": [[1,"desc"]]
+            "aaSorting": [[2,"desc"]]
           });
         });
 
@@ -23,6 +23,7 @@ html
       table#players.table.table-hover.dt-responsive
         thead
           tr
+            th
             th Player
             th Score
             th Active?
@@ -31,7 +32,9 @@ html
           each player in players
             tr
               td
-                a(href=player.url) #{player.name}
+                img(src=player.img_path, height="80px")
+              td.align-middle
+                h5: a(href=player.url) #{player.name}
               td #{player.score}
               td
                 if player.active
