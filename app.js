@@ -1,3 +1,4 @@
+var compression = require('compression');
 var express = require('express')();
 require('dotenv').config();
 var bodyParser = require('body-parser');
@@ -15,10 +16,11 @@ const { sanitizeBody } = require('express-validator/filter');
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(compression());
 
 // db connection
 var mongoDB = process.env.MONGO_URL;
-mongoose.connect(mongoDB); //, {user:process.env.MONGO_USER, pass:process.env.MONGO_PASSWORD});
+mongoose.connect(mongoDB, {user:process.env.MONGO_USER, pass:process.env.MONGO_PASSWORD});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

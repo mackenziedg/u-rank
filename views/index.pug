@@ -40,7 +40,7 @@ html
               button.btn.btn-primary(type="submit", name="submit")
                 h2 #{r[0].name}
 
-          h3 Career stats
+          h4 Career stats
           table.table.table-sm
             thead
               tr
@@ -64,28 +64,31 @@ html
                 td
                 td #{r[0].stats['FG%'].toFixed(3)}
                 if r[0].stats.hasOwnProperty("FG3%")
-                  td #{r[0].stats['FG3%'].toFixed(3)}
+                  if r[0].stats['FG3%'] == NaN
+                    td --
+                  else
+                    td #{r[0].stats['FG3%'].toFixed(3)}
                 td #{r[0].stats['FT%'].toFixed(3)}
                 td
                 td #{r[0].stats.PER}
                 td #{r[0].stats.WS}
 
+          hr
+
           if r[0].bling.length > 0
-            h4 Accolades
             p
               -  for(i = 0; i < r[0].bling.length; i++)
                    | #{r[0].bling[i]}
                    if i < r[0].bling.length-1
                      | , 
-
-          else
-            h4 No accolades
+            hr
 
           if r[0].active
-            h4 Currently active
+            p Currently active
           else
-            h4 Retired
+            p Retired
 
+          hr
           a(href=r[0].url) View my Basketball-Reference page.
 
         .col-md-2.text-center.align-middle
@@ -99,7 +102,7 @@ html
               button.btn.btn-primary(type="submit", name="submit")
                 h2 #{r[1].name}
 
-          h3 Career stats
+          h4 Career stats
           table.table.table-sm
             thead
               tr
@@ -123,27 +126,30 @@ html
                 td
                 td #{r[1].stats['FG%'].toFixed(3)}
                 if r[1].stats.hasOwnProperty("FG3%")
-                  td #{r[1].stats['FG3%'].toFixed(3)}
+                  if r[1].stats['FG3%'] == NaN
+                    td --
+                  else
+                    td #{r[1].stats['FG3%'].toFixed(3)}
                 td #{r[1].stats['FT%'].toFixed(3)}
                 td
-                td #{r[0].stats.PER}
-                td #{r[0].stats.WS}
+                td #{r[1].stats.PER}
+                td #{r[1].stats.WS}
+
+          hr
 
           if r[1].bling.length > 0
-            h4 Accolades
             p
               -  for(i = 0; i < r[1].bling.length; i++)
                    | #{r[1].bling[i]}
                    if i < r[1].bling.length-1
                      | , 
-
-          else
-            h4 No accolades
+            hr
 
           if r[1].active
-            h4 Currently active
+            p Currently active
           else
-            h4 Retired
+            p Retired
 
+          hr
 
           a(href=r[1].url) View my Basketball-Reference page.
