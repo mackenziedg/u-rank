@@ -32,124 +32,124 @@ html
 
 
       .row
-        .col-md-5.text-center
-          img(src=r[0].img_path, height="128px")
-          form.mt-3(method="POST")
-            .form-group
-              input(type="hidden", name="playerids", value=r[0]._id+":"+r[1]._id)
-              button.btn.btn-primary(type="submit", name="submit")
-                h2 #{r[0].name}
+        .col-md-4
+          .row
+            .col-md-12.text-right
+              form.mt-3(method="POST")
+                .form-group
+                  input(type="hidden", name="playerids", value=r[0]._id+":"+r[1]._id)
+                  button.btn.btn-primary(type="submit", name="submit")
+                    h3 #{r[0].name}
 
-          h4 Career stats
-          table.table.table-sm
-            thead
-              tr
-                th G
-                th PTS
-                th TRB
-                th AST
-                th
-                th FG%
-                if r[0].stats.hasOwnProperty("FG3%")
-                  th 3P%
-                th FT%
-                th
-                th PER
-                th WS
-              tr
-                td #{r[0].stats.G}
-                td #{r[0].stats.PTS}
-                td #{r[0].stats.TRB}
-                td #{r[0].stats.AST}
-                td
-                td #{r[0].stats['FG%'].toFixed(3)}
-                if r[0].stats.hasOwnProperty("FG3%")
-                  if r[0].stats['FG3%'] == NaN
-                    td --
-                  else
-                    td #{r[0].stats['FG3%'].toFixed(3)}
-                td #{r[0].stats['FT%'].toFixed(3)}
-                td
-                td #{r[0].stats.PER}
-                td #{r[0].stats.WS}
+          .row.mt-3
+            .col-md-7.text-left
+              h4 Accolades:
+              ul
+                if r[0].bling.length > 0
+                  each bl in r[0].bling
+                    li #{bl}
+                else
+                  li None
+            .col-md-5.text-right
+              img(src=r[0].img_path, height="128px")
+
 
           hr
 
-          if r[0].bling.length > 0
-            p
-              -  for(i = 0; i < r[0].bling.length; i++)
-                   | #{r[0].bling[i]}
-                   if i < r[0].bling.length-1
-                     | , 
-            hr
+          .row
+            .col-md-12.text-left
+              if r[0].active
+                h5 Currently active
+              else
+                h5 Retired
 
-          if r[0].active
-            p Currently active
-          else
-            p Retired
+          .row
+            .col-md-12.text-left
+              a(href=r[0].url) View my Basketball-Reference page.
 
-          hr
-          a(href=r[0].url) View my Basketball-Reference page.
-
-        .col-md-2.text-center.align-middle
+        .col-md-4.text-center.align-middle
           img(src="./static/img/vs_graphic.png", width="128px")
 
-        .col-md-5.text-center
-          img(src=r[1].img_path, height="128px")
-          form.mt-3(method="POST")
-            .form-group
-              input(type="hidden", name="playerids", value=r[1]._id+":"+r[0]._id)
-              button.btn.btn-primary(type="submit", name="submit")
-                h2 #{r[1].name}
+          h4 Career averages
 
-          h4 Career stats
           table.table.table-sm
-            thead
+            tbody
               tr
+                td #{r[0].stats.G}
                 th G
-                th PTS
-                th TRB
-                th AST
-                th
-                th FG%
-                if r[1].stats.hasOwnProperty("FG3%")
-                  th 3PT%
-                th FT%
-                th
-                th PER
-                th WS
-              tr
                 td #{r[1].stats.G}
+              tr
+                td #{r[0].stats.PTS}
+                th PTS
                 td #{r[1].stats.PTS}
+              tr
+                td #{r[0].stats.TRB}
+                th TRB
                 td #{r[1].stats.TRB}
+              tr
+                td #{r[0].stats.AST}
+                th AST
                 td #{r[1].stats.AST}
-                td
+              tr
+                td #{r[0].stats['FG%'].toFixed(3)}
+                th FG%
                 td #{r[1].stats['FG%'].toFixed(3)}
-                if r[1].stats.hasOwnProperty("FG3%")
-                  if r[1].stats['FG3%'] == NaN
-                    td --
+              if (r[0].stats.hasOwnProperty("FG3%") || r[1].stats.hasOwnProperty("FG3%"))
+                tr
+                  if r[0].stats.hasOwnProperty("FG3%")
+                    td #{r[0].stats["FG3%"].toFixed(3)}
                   else
-                    td #{r[1].stats['FG3%'].toFixed(3)}
+                    td --
+                  th 3P%
+                  if r[1].stats.hasOwnProperty("FG3%")
+                    td #{r[1].stats["FG3%"].toFixed(3)}
+                  else
+                    td --
+              tr
+                td #{r[0].stats['FT%'].toFixed(3)}
+                th FT%
                 td #{r[1].stats['FT%'].toFixed(3)}
-                td
+              tr
+                td #{r[0].stats.PER}
+                th PER
                 td #{r[1].stats.PER}
+              tr
+                td #{r[0].stats.WS}
+                th WS
                 td #{r[1].stats.WS}
 
+        .col-md-4
+          .row
+            .col-md-12.text-left
+              form.mt-3(method="post")
+                .form-group
+                  input(type="hidden", name="playerids", value=r[1]._id+":"+r[0]._id)
+                  button.btn.btn-primary.text-right(type="submit", name="submit")
+                    h3 #{r[1].name}
+
+
+          .row.mt-3
+            .col-md-5.text-left
+              img(src=r[1].img_path, height="128px")
+            .col-md-7.text-right
+              h4 Accolades:
+              ul
+                if r[1].bling.length > 0
+                  each bl in r[1].bling
+                    li #{bl}
+                else
+                  li None
+
           hr
 
-          if r[1].bling.length > 0
-            p
-              -  for(i = 0; i < r[1].bling.length; i++)
-                   | #{r[1].bling[i]}
-                   if i < r[1].bling.length-1
-                     | , 
-            hr
+          .row
+            .col-md-12.text-left
+              if r[1].active
+                h5 Currently active
+              else
+                h5 Retired
 
-          if r[1].active
-            p Currently active
-          else
-            p Retired
+          .row
+            .col-md-12.text-left
+              a(href=r[1].url) View my Basketball-Reference page.
 
-          hr
-
-          a(href=r[1].url) View my Basketball-Reference page.
