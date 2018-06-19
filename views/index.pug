@@ -102,17 +102,16 @@ html
                 td #{r[0].stats['FG%'].toFixed(3)}
                 th FG%
                 td #{r[1].stats['FG%'].toFixed(3)}
-              if (r[0].stats.hasOwnProperty("FG3%") || r[1].stats.hasOwnProperty("FG3%"))
-                tr
-                  if (r[0].stats.hasOwnProperty("FG3%") && String(r[0].stats["FG3%"]) != "NaN")
-                    td #{r[0].stats["FG3%"].toFixed(3)}
-                  else
-                    td --
-                  th 3P%
-                  if (r[1].stats.hasOwnProperty("FG3%") && String(r[1].stats["FG3%"]) != "NaN")
-                    td #{r[1].stats["FG3%"].toFixed(3)}
-                  else
-                    td --
+              tr
+                if (r[0].stats.hasOwnProperty("FG3%") && String(r[0].stats["FG3%"]) != "NaN")
+                  td #{r[0].stats["FG3%"].toFixed(3)}
+                else
+                  td --
+                th 3P%
+                if (r[1].stats.hasOwnProperty("FG3%") && String(r[1].stats["FG3%"]) != "NaN")
+                  td #{r[1].stats["FG3%"].toFixed(3)}
+                else
+                  td --
               tr
                 td #{r[0].stats['FT%'].toFixed(3)}
                 th FT%
