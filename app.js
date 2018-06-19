@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 app.use(compression());
 app.get('/static/*', s3Proxy({
     bucket: process.env.S3_BUCKET,
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.S3_ACCESS_KEY,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
     overrideCacheControl: 'max-age=100000'
 }));
 
