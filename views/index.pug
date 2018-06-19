@@ -52,6 +52,7 @@ html
                   li None
             .col-md-5.text-right
               img(src=r[0].img_path, height="128px")
+              #{r[0].position}
 
 
           hr
@@ -61,7 +62,7 @@ html
               if r[0].active
                 h5 Currently active
               else
-                h5 Retired
+                h5 #{r[0].start} to #{r[0].end}
 
           .row
             .col-md-12.text-left
@@ -88,6 +89,14 @@ html
                 td #{r[0].stats.AST}
                 th AST
                 td #{r[1].stats.AST}
+              tr
+                td #{r[0].stats.BLK}
+                th BLK
+                td #{r[1].stats.BLK}
+              tr
+                td #{r[0].stats.STL}
+                th STL
+                td #{r[1].stats.STL}
               tr
                 td #{r[0].stats['FG%'].toFixed(3)}
                 th FG%
@@ -129,6 +138,7 @@ html
           .row.mt-3
             .col-md-5.text-left
               img(src=r[1].img_path, height="128px")
+              #{r[1].position}
             .col-md-7.text-right
               h4 Accolades:
               ul
@@ -145,7 +155,7 @@ html
               if r[1].active
                 h5 Currently active
               else
-                h5 Retired
+                h5 #{r[1].start} to #{r[1].end}
 
           .row
             .col-md-12.text-right
