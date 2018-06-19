@@ -34,29 +34,11 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // Routes
 app.get('/', function (req, res){
     Players.aggregate().sample(2).then(function(d){
-        res.render('index', {r: d, route: ''});
+        res.render('index', {r: d});
     });
 });
 
-app.get('/hof', function (req, res){
-    Players.aggregate().match({bling: "Hall of Fame"}).sample(2).then(function(d){
-        res.render('index', {r: d, route: 'hof'});
-    });
-});
-
-app.get('/active', function (req, res){
-    Players.aggregate().match({active: true}).sample(2).then(function(d){
-        res.render('index', {r: d, route: 'active'});
-    });
-});
-
-app.get('/retired', function (req, res){
-    Players.aggregate().match({active: false}).sample(2).then(function(d){
-        res.render('index', {r: d, route: 'retired'});
-    });
-});
-
-update_scores = function(req, res, path){
+update_scores = function(req, res){
     var playerIds = req.body.playerids.split(":");
     var winner = playerIds[0];
     var loser = playerIds[1];
@@ -69,42 +51,22 @@ update_scores = function(req, res, path){
 
             Players.findByIdAndUpdate(winner, {score: newWinScore}).then(function(d){
                 Players.findByIdAndUpdate(loser, {score: newLoseScore}).then(function(d){
-                    if(path=='hof'){
-                        Players.aggregate().match({bling: "Hall of Fame"}).sample(2).then(function(d){
-                            res.render('index', {r: d, route: 'hof'});
-                        });
-                    } else if(path=='active'){
-                        Players.aggregate().match({active: true}).sample(2).then(function(d){
-                            res.render('index', {r: d, route: 'active'});
-                        });
-                    } else if(path=='retired'){
-                    Players.aggregate().match({active: false}).sample(2).then(function(d){
-                        res.render('index', {r: d, route: 'retired'});
+                    Players.aggregate().sample(2).then(function(d){
+                        res.render('index', {r: d});
                     });
-                    } else {
-                        Players.aggregate().sample(2).then(function(d){
-                            res.render('index', {r: d, route: ''});
-                        });
-                    }
                 });
             });
         });
     });
 }
 
-app.post('/', function(req, res){update_scores(req, res, '')});
-app.post('/hof', function(req, res){update_scores(req, res, 'hof')});
-app.post('/active', function(req, res){update_scores(req, res, 'active')});
-app.post('/retired', function(req, res){update_scores(req, res, 'retired')});
+app.post('/', function(req, res){update_scores(req, res)});
 
 app.get('/rankings', function(req, res){
     Players.find({}).sort('-score').then(function(d){
         res.render('rankings', {players: d});
     });
 });
-
-// Static import directories
-// app.use('/static', serve(__dirname + '/public'));
 
 // Start server
 var port = process.env.PORT || 8080;
