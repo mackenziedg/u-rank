@@ -69,7 +69,7 @@ html
               a(href=r[0].url) View my Basketball-Reference page.
 
         .col-md-4.text-center.align-middle.mt-3
-          img(src="./static/img/vs_graphic.png", width="128px")
+          img(src="./static/img/vs_graphic.png", width="100px")
 
           table.table.table-sm.mt-3
             tbody
@@ -90,13 +90,25 @@ html
                 th AST
                 td #{r[1].stats.AST}
               tr
-                td #{r[0].stats.BLK}
+                if r[0].stats.BLK != NaN
+                  td #{r[0].stats.BLK}
+                else
+                  td --
                 th BLK
-                td #{r[1].stats.BLK}
+                if r[1].stats.BLK != NaN
+                  td #{r[1].stats.BLK}
+                else
+                  td --
               tr
-                td #{r[0].stats.STL}
+                if r[0].stats.STL != NaN
+                  td #{r[0].stats.STL}
+                else
+                  td --
                 th STL
-                td #{r[1].stats.STL}
+                if r[1].stats.STL != NaN
+                  td #{r[1].stats.STL}
+                else
+                  td --
               tr
                 td #{r[0].stats['FG%'].toFixed(3)}
                 th FG%
