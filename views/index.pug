@@ -3,12 +3,12 @@ html
   head
     link(rel="stylesheet", href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.css", type="text/css")
     script(type="text/javascript", src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.18/datatables.min.js")
-    title NBA Battle Royale
+    title NephRank
 
   body
     .container
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
-        .navbar-brand NBA Battle Royale
+        .navbar-brand NephRank
         .collapse.navbar-collapse
           ul.navbar-nav.mr-auto
             li.nav-item.active: a.nav-link(href="/") Play!
@@ -24,6 +24,7 @@ html
                   input(type="hidden", name="playerids", value=r[0]._id+":"+r[1]._id)
                   button.btn.btn-primary(type="submit", name="submit")
                     h3 #{r[0].name}
+                  p.text-right.font-weight-bold #{r[1].position}
 
           .row.mt-3
             .col-md-7.text-left
@@ -36,11 +37,6 @@ html
                   li None
             .col-md-5.text-right
               img(src=r[0].img_path, height="128px")
-
-          .row
-            .col-md-12.text-right.font-weight-bold
-              p #{r[0].position}
-
 
           hr
 
@@ -55,7 +51,7 @@ html
             .col-md-12.text-left
               a(href=r[0].url) View Basketball-Reference page.
 
-        .col-md-4.text-center.align-middle.mt-3
+        .col-md-4.text-center.align-middle.mt-1
           img(src="./static/img/vs_graphic.png", width="100px")
 
           table.table.table-sm.mt-3
@@ -69,30 +65,36 @@ html
                 th PTS
                 td #{r[1].stats.PTS}
               tr
-                td #{r[0].stats.TRB}
+                if String(r[0].stats.TRB) != "NaN"
+                  td #{r[0].stats.TRB}
+                else
+                  td --
                 th TRB
-                td #{r[1].stats.TRB}
+                if String(r[1].stats.TRB) != "NaN"
+                  td #{r[1].stats.TRB}
+                else
+                  td --
               tr
                 td #{r[0].stats.AST}
                 th AST
                 td #{r[1].stats.AST}
               tr
-                if r[0].stats.BLK != NaN
+                if String(r[0].stats.BLK) != "NaN"
                   td #{r[0].stats.BLK}
                 else
                   td --
                 th BLK
-                if r[1].stats.BLK != NaN
+                if String(r[1].stats.BLK) != "NaN"
                   td #{r[1].stats.BLK}
                 else
                   td --
               tr
-                if r[0].stats.STL != NaN
+                if String(r[0].stats.STL) != "NaN"
                   td #{r[0].stats.STL}
                 else
                   td --
                 th STL
-                if r[1].stats.STL != NaN
+                if String(r[1].stats.STL) != "NaN"
                   td #{r[1].stats.STL}
                 else
                   td --
@@ -102,12 +104,12 @@ html
                 td #{r[1].stats['FG%'].toFixed(3)}
               if (r[0].stats.hasOwnProperty("FG3%") || r[1].stats.hasOwnProperty("FG3%"))
                 tr
-                  if r[0].stats.hasOwnProperty("FG3%")
+                  if (r[0].stats.hasOwnProperty("FG3%") && String(r[0].stats["FG3%"]) != "NaN")
                     td #{r[0].stats["FG3%"].toFixed(3)}
                   else
                     td --
                   th 3P%
-                  if r[1].stats.hasOwnProperty("FG3%")
+                  if (r[1].stats.hasOwnProperty("FG3%") && String(r[1].stats["FG3%"]) != "NaN")
                     td #{r[1].stats["FG3%"].toFixed(3)}
                   else
                     td --
@@ -132,6 +134,7 @@ html
                   input(type="hidden", name="playerids", value=r[1]._id+":"+r[0]._id)
                   button.btn.btn-primary.text-right(type="submit", name="submit")
                     h3 #{r[1].name}
+                  p.text-left.font-weight-bold #{r[0].position}
 
 
           .row.mt-3
@@ -146,9 +149,6 @@ html
                     li #{bl}
                 else
                   li None
-          .row
-            .col-md-12.text-left.font-weight-bold
-              p #{r[0].position}
 
           hr
 
