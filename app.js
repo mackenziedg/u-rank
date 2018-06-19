@@ -5,6 +5,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Players = require('./models/Players.js');
 var serve = require('serve-static');
+var s3Proxy = require('s3-proxy');
+
+var bucketName = process.env.S3_BUCKET;
+
 
 var elo = require('./elo.js');
 
@@ -17,6 +21,12 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
+app.get('/static/*', s3Proxy({
+    bucket: bucketName,
+    accessKeyId: process.env.S3_ACCESS_KEY,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    overrideCacheControl: 'max-age=100000'
+}));
 
 // db connection
 var mongoDB = process.env.MONGO_URL;
@@ -98,7 +108,7 @@ app.get('/rankings', function(req, res){
 });
 
 // Static import directories
-app.use('/static', serve(__dirname + '/public'));
+// app.use('/static', serve(__dirname + '/public'));
 
 // Start server
 var port = process.env.PORT || 8080;
