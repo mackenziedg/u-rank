@@ -17,7 +17,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(compression());
-app.get('/static/*', s3Proxy({
+app.use('/static', s3Proxy({
     bucket: process.env.S3_BUCKET,
     accessKeyId: process.env.S3_ACCESS_KEY,
     secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
