@@ -36,7 +36,7 @@ html
                 img(src=player.img_path, height="80px")
               td.align-middle
                 h5: a(href=player.url) #{player.name}
-              td #{player.score}
+              td #{player.score.toFixed(2)}
               td
                 if player.active
                   p Active
