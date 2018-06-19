@@ -24,7 +24,7 @@ html
                   input(type="hidden", name="playerids", value=r[0]._id+":"+r[1]._id)
                   button.btn.btn-primary(type="submit", name="submit")
                     h3 #{r[0].name}
-                  p.text-right.font-weight-bold #{r[1].position}
+                  p.text-right.font-weight-bold #{r[0].position}
 
           .row.mt-3
             .col-md-7.text-left
@@ -134,7 +134,7 @@ html
                   input(type="hidden", name="playerids", value=r[1]._id+":"+r[0]._id)
                   button.btn.btn-primary.text-right(type="submit", name="submit")
                     h3 #{r[1].name}
-                  p.text-left.font-weight-bold #{r[0].position}
+                  p.text-left.font-weight-bold #{r[1].position}
 
 
           .row.mt-3
