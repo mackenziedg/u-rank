@@ -9,14 +9,14 @@ html
     script.
       var _paq = _paq || [];
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.www.u-rank.xyz"]);
       _paq.push(["setDoNotTrack", true]);
       _paq.push(['trackPageView']);
       _paq.push(['enableLinkTracking']);
       (function() {
         var u="//34.228.14.142/";
         _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', '1']);
+        _paq.push(['setSiteId', '2']);
         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
         g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
       })();
@@ -25,7 +25,7 @@ html
     .container
 
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
-        .navbar-brand NBA Battle Royale
+        .navbar-brand (nef) U-Rank
         ul.navbar-nav
           li.navbar-item: a.nav-link(href="/") Play!
           li.navbar-item.active: a.nav-link(href="/rankings") View Rankings
@@ -36,6 +36,8 @@ html
             "aaSorting": [[2,"desc"]]
           });
         });
+
+      h1 Leaderboard
 
       .row
       table#players.table.table-hover.dt-responsive
@@ -58,7 +60,7 @@ html
                 if player.active
                   p Active
                 else
-                  p Inactive
+                  p No
               td
                 if player.bling.indexOf("Hall of Fame") >= 0
                   p HOF

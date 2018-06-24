@@ -63,7 +63,7 @@ update_scores = function(req, res){
 app.post('/', function(req, res){update_scores(req, res)});
 
 app.get('/rankings', function(req, res){
-    Players.find({}).sort('-score').then(function(d){
+    Players.find({}).sort('-score').limit(50).then(function(d){
         res.render('rankings', {players: d});
     });
 });
