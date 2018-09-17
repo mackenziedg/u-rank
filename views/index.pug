@@ -14,24 +14,6 @@ html
     meta(name="msapplication-config", content="/static/img/favicon/favicon.ico/browserconfig.xml")
     meta(name="theme-color", content="#ffffff")
 
-
-    // Motomo tracking code
-    script.
-      var _paq = _paq || [];
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-      _paq.push(["setCookieDomain", "*.www.u-rank.xyz"]);
-      _paq.push(["setDoNotTrack", true]);
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u="//www.urankmatomo.xyz/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', '2']);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-      })();
-
-
   body
     .container
       nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-2
